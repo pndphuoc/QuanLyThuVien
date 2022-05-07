@@ -9,12 +9,12 @@ namespace QuanLyThuVIen.Model
     public class DocGia_MuonSach
     {
         int MaDocGia { get; set; }
-        int MaPhieuMuon { get; set; }
+        int MaChiTietMuon { get; set; }
         int TenDocGia { get; set; }
         DateTime NgayMuon { get; set; }
-        int SoLuong { get; set; }
+        int SoLuongMuon { get; set; }
         DateTime HanTra { get; set; }
-        bool TinhTrang { get; set; }
+        bool TrangThai { get; set; }
 
     }
 }
