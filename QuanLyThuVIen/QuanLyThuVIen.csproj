@@ -59,6 +59,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\DataChiTietMuon.cs" />
+    <Compile Include="Data\DataChucDanh.cs" />
+    <Compile Include="Data\DataDocGia.cs" />
     <Compile Include="Data\DataLoaiSach.cs" />
     <Compile Include="Data\DataNgonNgu.cs" />
     <Compile Include="Data\DataNXB.cs" />
@@ -109,6 +112,9 @@
     <Compile Include="GUI\TraSachForm.Designer.cs">
       <DependentUpon>TraSachForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Model\ChiTietMuon.cs" />
+    <Compile Include="Model\ChucDanh.cs" />
+    <Compile Include="Model\DocGia.cs" />
     <Compile Include="Model\DocGia_MuonSach.cs" />
     <Compile Include="Model\NgonNgu.cs" />
     <Compile Include="Model\NhaXuatBan.cs" />

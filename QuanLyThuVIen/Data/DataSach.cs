@@ -11,6 +11,10 @@ namespace QuanLyThuVIen.Data
 {
     public class DataSach
     {
+        /// <summary>
+        /// Lấy danh sách tất cả sách
+        /// </summary>
+        /// <returns></returns>
         public List<Sach> GetListSach()
         {
             using (var cnn = DbUtils.GetConnection())
@@ -22,7 +26,31 @@ namespace QuanLyThuVIen.Data
                 return lstSach;
             }
         }
+        /// <summary>
+        /// Lấy danh sách sách theo mã chi tiết mượn
+        /// </summary>
+        /// <param name="MaChiTietMuon"></param>
+        /// <returns></returns>
+        public List<Sach> GetListSach(int MaChiTietMuon)
+        {
+            using (var cnn = DbUtils.GetConnection())
+            {
+                //var sql = @"SELECT s.MaSach, s.TenSach,nxb.MaNhaXuatBan, nxb.TenNhaXuatBan, s.DonGia, s.MaNgonNgu, s.NamXuatBan, s.SoLuong, s.SoTaiBan,s.TinhTrang 
+                //            from Sach as s inner join NhaXuatBan as nxb on nxb.MaNhaXuatBan = s.MaNhaXuatBan";
+                var sql = "select * from Sach_ChiTietMuon as sctm join Sach as s on s.MaSach = sctm.MaSach where sctm.MaChiTietMuon = @MaChiTietMuon";
+                var param = new
+                {
+                    @MaChiTietMuon = MaChiTietMuon
+                };
+                var lstSach = cnn.Query<Sach>(sql, param).ToList();
 
+                return lstSach;
+            }
+        }
+        /// <summary>
+        /// Lấy thông tin của class để hiển thị ra dataGridView ở quản lý sách
+        /// </summary>
+        /// <returns></returns>
         public List<SachResponse> GetListSachResponse()
         {
             using (var cnn = DbUtils.GetConnection())
@@ -33,7 +61,11 @@ namespace QuanLyThuVIen.Data
                 return lstSach;
             }
         }
-
+        /// <summary>
+        /// Lấy thông tin sách theo mã sách
+        /// </summary>
+        /// <param name="MaSach"></param>
+        /// <returns></returns>
         public Sach GetSach(int MaSach)
         {
             using (var cnn = DbUtils.GetConnection())
@@ -45,7 +77,11 @@ namespace QuanLyThuVIen.Data
                 return result[0];
             }
         }
-
+        /// <summary>
+        /// Thêm mới 1 quyển sách
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
         public bool Insert(Sach s)
         {
             using (var cnn = DbUtils.GetConnection())
@@ -73,6 +109,11 @@ namespace QuanLyThuVIen.Data
                 return nEffectedRows == 1;
             }
         }
+        /// <summary>
+        /// Xoá 1 quyển sách
+        /// </summary>
+        /// <param name="MaSach"></param>
+        /// <returns></returns>
         public bool Delete(int MaSach)
         {
             using (var cnn = DbUtils.GetConnection())
@@ -91,6 +132,11 @@ namespace QuanLyThuVIen.Data
                 return nEffectedRows == 1;
             }
         }
+        /// <summary>
+        /// Cập nhật 1 quyển sách
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
         public bool Update(Sach s)
         {
             using (var cnn = DbUtils.GetConnection())
@@ -120,6 +166,11 @@ namespace QuanLyThuVIen.Data
                 return nEffectedRows == 1;
             }
         }
+        /// <summary>
+        /// Tìm kiếm sách theo tên sách
+        /// </summary>
+        /// <param name="tenSach"></param>
+        /// <returns></returns>
         public List<SachResponse> Search(string tenSach)
         {
             using (var cnn = DbUtils.GetConnection())
@@ -137,6 +188,7 @@ namespace QuanLyThuVIen.Data
                 return lstSach;
             }
         }
+
     }
 }
 

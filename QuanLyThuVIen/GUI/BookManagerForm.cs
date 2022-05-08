@@ -28,6 +28,7 @@ namespace QuanLyThuVIen.GUI
 
             var lstNXB = dataNXB.GetListNXB();
             var lstSach = dataSach.GetListSachResponse();
+
             bsSach.DataSource = lstSach;
             gridSach.DataSource = bsSach;
             gridSach.AutoGenerateColumns = false;

@@ -1,4 +1,5 @@
 ﻿using QuanLyThuVIen.Data;
+using QuanLyThuVIen.Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -19,6 +20,7 @@ namespace QuanLyThuVIen.GUI
             DataDocGia_MuonSach dataDGMS = new DataDocGia_MuonSach();
 
             var lstDGMS = dataDGMS.GetListDocGiaMuonSach();
+
             bsMuonSach.DataSource = lstDGMS;
             gridMuon.DataSource = bsMuonSach;
             gridMuon.AutoGenerateColumns = false;
@@ -43,10 +45,34 @@ namespace QuanLyThuVIen.GUI
 
         private void gridMuon_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            if (e.RowIndex > 0)
+            if (e.RowIndex >= 0)
             {
                 DataGridViewRow row = gridMuon.Rows[e.RowIndex];
-                txtMaPhieuMuon.Text = Convert.ToString(row.Cells["MaChiTietMuon"].Value);
+                DataDocGia dtDocGia = new DataDocGia();
+                DataChiTietMuon dtCTM = new DataChiTietMuon();
+                DataSach dtSach = new DataSach();
+
+
+                var MaDocGia = Convert.ToInt32(row.Cells[0].Value.ToString());
+                var DocGia = (DocGia)dtDocGia.GetDocGia((int)MaDocGia);
+                
+
+                txtTenDocGia.Text = DocGia.TenDocGia;
+                txtChucDanh.Text = DocGia.MaChucDanh.ToString();
+                txtEmail.Text = DocGia.Email;
+                txtDienThoai.Text = DocGia.SoDienThoai;
+                DataChucDanh dataChucDanh = new DataChucDanh();
+                txtChucDanh.Text = dataChucDanh.GetChucDanh(Convert.ToInt32(DocGia.MaChucDanh)).TenChucDanh;
+                txtMaPhieuMuon.Text = row.Cells["MaChiTietMuon"].Value.ToString();
+
+
+                txtHanTra.Text = dtCTM.GetChiTietMuon(Convert.ToInt32(txtMaPhieuMuon.Text)).HanTra.ToString("dd/MM/yyyy");
+                txtNgayMuon.Text = dtCTM.GetChiTietMuon(Convert.ToInt32(txtMaPhieuMuon.Text)).NgayMuon.ToString("dd/MM/yyyy");
+                
+                var lstSach = dtSach.GetListSach(Convert.ToInt32(txtMaPhieuMuon.Text));
+                lbDangMuon.DataSource = lstSach;
+                lbDangMuon.DisplayMember = "TenSach";
+                labelCount.Text = lstSach.Count().ToString();
             }
         }
     }

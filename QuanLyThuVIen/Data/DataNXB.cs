@@ -10,6 +10,10 @@ namespace QuanLyThuVIen.Data
 {
     public class DataNXB
     {
+        /// <summary>
+        /// Lấy danh sách nhà xuất bản
+        /// </summary>
+        /// <returns></returns>
         public List<NhaXuatBan> GetListNXB()
         {
             using (var cnn = DbUtils.GetConnection())
@@ -19,7 +23,11 @@ namespace QuanLyThuVIen.Data
                 return lstNXB;
             }
         }
-
+        /// <summary>
+        /// Lấy thông tin 1 nhà xuất bản
+        /// </summary>
+        /// <param name="MaNXB"></param>
+        /// <returns></returns>
         public NhaXuatBan GetNXB(int MaNXB)
         {
             using (var cnn = DbUtils.GetConnection())
