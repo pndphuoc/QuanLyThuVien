@@ -75,6 +75,12 @@
     <Compile Include="GUI\BookManagerForm.Designer.cs">
       <DependentUpon>BookManagerForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUI\ChonSachForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\ChonSachForm.Designer.cs">
+      <DependentUpon>ChonSachForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI\EditTacGia.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -125,6 +131,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="GUI\BookManagerForm.resx">
       <DependentUpon>BookManagerForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\ChonSachForm.resx">
+      <DependentUpon>ChonSachForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\EditTacGia.resx">
       <DependentUpon>EditTacGia.cs</DependentUpon>

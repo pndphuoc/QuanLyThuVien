@@ -45,5 +45,25 @@ namespace QuanLyThuVIen.Data
                 return lstChiTietMuon[0];
             }
         }
+
+        public bool InsertChiTietMuon(ChiTietMuon ctm)
+        {
+            using (var cnn = DbUtils.GetConnection())
+            {             
+                var sql = @"insert into ChiTietMuon(MaDocGia, NgayMuon, SoLuongMuon, HanTra, TrangThai)
+                            values(@MaDocGia, @NgayMuon, @SoLuongMuon, @HanTra, @TrangThai)";
+                var param = new
+                {
+                    MaDocGia = ctm.MaDocGia,
+                    NgayMuon = ctm.NgayMuon,
+                    SoLuongMuon = ctm.SoLuongMuon,
+                    HanTra = ctm.HanTra,
+                    TrangThai = ctm.TrangThai
+                };
+
+                int nEffectedRows = cnn.Execute(sql, param);
+                return nEffectedRows == 1;
+            }
+        }
     }
 }

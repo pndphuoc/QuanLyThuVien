@@ -25,6 +25,17 @@ namespace QuanLyThuVIen.Data
                 return lstSach;
             }
         }
+
+        public List<DocGia_MuonSach> GetListQuaHan()
+        {
+            using (var cnn = DbUtils.GetConnection())
+            {
+                var sql = @"select dg.MaDocGia, ctm.MaChiTietMuon, dg.TenDocGia, ctm.NgayMuon, ctm.SoLuongMuon, ctm.HanTra, ctm.TrangThai 
+                            from DocGia as dg join ChiTietMuon as ctm on ctm.MaDocGia = dg.MaDocGia where ctm.TrangThai = 1";
+                var lstSach = cnn.Query<DocGia_MuonSach>(sql).ToList();
+                return lstSach;
+            }
+        }
         /// <summary>
         /// Tìm kiếm 
         /// </summary>

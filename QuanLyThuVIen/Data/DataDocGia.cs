@@ -36,6 +36,9 @@ namespace QuanLyThuVIen.Data
             {
                 //var sql = @"SELECT s.MaSach, s.TenSach,nxb.MaNhaXuatBan, nxb.TenNhaXuatBan, s.DonGia, s.MaNgonNgu, s.NamXuatBan, s.SoLuong, s.SoTaiBan,s.TinhTrang 
                 //            from Sach as s inner join NhaXuatBan as nxb on nxb.MaNhaXuatBan = s.MaNhaXuatBan";
+                try
+                {
+
                 var sql = "select * from DocGia where MaDocGia = @MaDocGia";
                 var param = new
                 {
@@ -44,6 +47,24 @@ namespace QuanLyThuVIen.Data
 
                 var lstDocGia = cnn.Query<DocGia>(sql, param).ToList();
                 return lstDocGia[0];
+                }
+                catch (Exception ex)
+                {
+                    throw new ArgumentException("Index is out of range", nameof(MaDocGia), ex);
+                }
+            }
+        }
+
+        public int MaxOfMaDocGia()
+        {
+            using (var cnn = DbUtils.GetConnection())
+            {
+                var sql = @"select Max(MaDocGia) from DocGia";
+
+                
+
+                int result = (int)cnn.ExecuteScalar(sql);
+                return result;
             }
         }
     }
