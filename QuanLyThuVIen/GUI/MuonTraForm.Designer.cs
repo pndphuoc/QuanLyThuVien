@@ -83,7 +83,7 @@
             this.NgayMuon = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SoLuongMuon = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.HanTra = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TinhTrang = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TrangThai = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gridMuon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsMuonSach)).BeginInit();
             this.SuspendLayout();
@@ -98,7 +98,7 @@
             this.NgayMuon,
             this.SoLuongMuon,
             this.HanTra,
-            this.TinhTrang});
+            this.TrangThai});
             this.gridMuon.Location = new System.Drawing.Point(68, 89);
             this.gridMuon.Margin = new System.Windows.Forms.Padding(2);
             this.gridMuon.Name = "gridMuon";
@@ -138,6 +138,7 @@
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Size = new System.Drawing.Size(306, 20);
             this.txtSearch.TabIndex = 3;
+            this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
             // 
             // label2
             // 
@@ -632,14 +633,14 @@
             this.HanTra.ReadOnly = true;
             this.HanTra.Width = 125;
             // 
-            // TinhTrang
+            // TrangThai
             // 
-            this.TinhTrang.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.TinhTrang.DataPropertyName = "TrangThai";
-            this.TinhTrang.HeaderText = "Tình trạng";
-            this.TinhTrang.MinimumWidth = 6;
-            this.TinhTrang.Name = "TinhTrang";
-            this.TinhTrang.ReadOnly = true;
+            this.TrangThai.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.TrangThai.DataPropertyName = "TrangThai";
+            this.TrangThai.HeaderText = "Tình trạng";
+            this.TrangThai.MinimumWidth = 6;
+            this.TrangThai.Name = "TrangThai";
+            this.TrangThai.ReadOnly = true;
             // 
             // MuonTraForm
             // 
@@ -762,6 +763,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn NgayMuon;
         private System.Windows.Forms.DataGridViewTextBoxColumn SoLuongMuon;
         private System.Windows.Forms.DataGridViewTextBoxColumn HanTra;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TinhTrang;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TrangThai;
     }
 }

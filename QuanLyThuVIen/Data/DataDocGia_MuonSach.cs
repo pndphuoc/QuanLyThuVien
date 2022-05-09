@@ -35,12 +35,14 @@ namespace QuanLyThuVIen.Data
             using (var cnn = DbUtils.GetConnection())
             {
                 string search = "%" + searchValue + "%";
-                var sql = @"select s.MaSach, s.TenSach, nxb.TenNhaXuatBan from Sach as s join NhaXuatBan as nxb on s.MaNhaXuatBan = nxb.MaNhaXuatBan
-                where TenSach like @TenSach";
+                var sql = @"select dg.MaDocGia, ctm.MaChiTietMuon, dg.TenDocGia, ctm.NgayMuon, ctm.SoLuongMuon, ctm.HanTra, ctm.TrangThai 
+                            from DocGia as dg join ChiTietMuon as ctm on ctm.MaDocGia = dg.MaDocGia
+                            where ctm.MaChiTietMuon like @searchValue or dg.TenDocGia like @search";
 
                 var param = new
                 {
-                    TenSach = search
+                    searchValue = searchValue,
+                    search = search
                 };
 
                 var lstSach = cnn.Query<DocGia_MuonSach>(sql, param).ToList();

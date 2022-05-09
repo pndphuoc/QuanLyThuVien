@@ -25,7 +25,6 @@ namespace QuanLyThuVIen.GUI
             gridMuon.DataSource = bsMuonSach;
             gridMuon.AutoGenerateColumns = false;
 
-
         }
 
         private void MuonTraForm_Load(object sender, EventArgs e)
@@ -75,5 +74,14 @@ namespace QuanLyThuVIen.GUI
                 labelCount.Text = lstSach.Count().ToString();
             }
         }
+
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            DataDocGia_MuonSach dtDocGiaMuonSach = new DataDocGia_MuonSach();
+            bsMuonSach.DataSource = dtDocGiaMuonSach.Search(txtSearch.Text);
+            gridMuon.DataSource = bsMuonSach;
+        }
+
+
     }
 }
