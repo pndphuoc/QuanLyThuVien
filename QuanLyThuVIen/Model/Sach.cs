@@ -21,6 +21,7 @@ namespace QuanLyThuVIen.Model
         public string Anh { get; set; }
         public int MaLoaiSach { get; set; }
 
+        public int SoLuongCon { get; set; }
         public Sach()
         {
 

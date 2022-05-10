@@ -125,6 +125,7 @@
     <Compile Include="Model\NgonNgu.cs" />
     <Compile Include="Model\NhaXuatBan.cs" />
     <Compile Include="Model\Sach.cs" />
+    <Compile Include="Model\SachForSelect.cs" />
     <Compile Include="Model\SachResponse.cs" />
     <Compile Include="Model\TacGia.cs" />
     <Compile Include="Model\LoaiSach.cs" />

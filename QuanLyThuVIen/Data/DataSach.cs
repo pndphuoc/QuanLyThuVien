@@ -61,6 +61,17 @@ namespace QuanLyThuVIen.Data
                 return lstSach;
             }
         }
+        public List<SachForSelect> GetSachForSelect()
+        {
+            using (var cnn = DbUtils.GetConnection())
+            {
+                var sql = @"SELECT s.MaSach, s.TenSach,nxb.TenNhaXuatBan, s.SoLuongCon
+                            from Sach as s inner join NhaXuatBan as nxb on nxb.MaNhaXuatBan = s.MaNhaXuatBan";
+                var lstSach = cnn.Query<SachForSelect>(sql).ToList();
+                return lstSach;
+            }
+        }
+
         /// <summary>
         /// Lấy thông tin sách theo mã sách
         /// </summary>

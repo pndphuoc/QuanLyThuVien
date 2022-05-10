@@ -75,22 +75,15 @@
             this.label15 = new System.Windows.Forms.Label();
             this.dtNgayMuon = new System.Windows.Forms.DateTimePicker();
             this.dtNgayTra = new System.Windows.Forms.DateTimePicker();
-            this.label13 = new System.Windows.Forms.Label();
-            this.txtSearchBook = new System.Windows.Forms.TextBox();
             this.btnHuy_MUON = new System.Windows.Forms.Button();
             this.btnDongY_MUON = new System.Windows.Forms.Button();
             this.txtTenDocGia_Muon = new System.Windows.Forms.TextBox();
             this.bsMuonSach = new System.Windows.Forms.BindingSource(this.components);
             this.lbNotify = new System.Windows.Forms.Label();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.Checked = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.MaSach = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TenSach = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TacGia = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TenNhaXuatBan = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.button1 = new System.Windows.Forms.Button();
+            this.lbChonSach = new System.Windows.Forms.ListBox();
             ((System.ComponentModel.ISupportInitialize)(this.gridMuon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsMuonSach)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // gridMuon
@@ -486,7 +479,7 @@
             // 
             this.label22.AutoSize = true;
             this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label22.Location = new System.Drawing.Point(920, 276);
+            this.label22.Location = new System.Drawing.Point(920, 291);
             this.label22.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(150, 22);
@@ -497,7 +490,7 @@
             // 
             this.label23.AutoSize = true;
             this.label23.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label23.Location = new System.Drawing.Point(1364, 433);
+            this.label23.Location = new System.Drawing.Point(1362, 546);
             this.label23.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(14, 15);
@@ -508,7 +501,7 @@
             // 
             this.label24.AutoSize = true;
             this.label24.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label24.Location = new System.Drawing.Point(1319, 433);
+            this.label24.Location = new System.Drawing.Point(1317, 546);
             this.label24.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(25, 15);
@@ -571,29 +564,10 @@
             this.dtNgayTra.Size = new System.Drawing.Size(196, 20);
             this.dtNgayTra.TabIndex = 75;
             // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(1096, 280);
-            this.label13.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(68, 17);
-            this.label13.TabIndex = 76;
-            this.label13.Text = "Tìm kiếm:";
-            // 
-            // txtSearchBook
-            // 
-            this.txtSearchBook.Location = new System.Drawing.Point(1180, 280);
-            this.txtSearchBook.Margin = new System.Windows.Forms.Padding(2);
-            this.txtSearchBook.Name = "txtSearchBook";
-            this.txtSearchBook.Size = new System.Drawing.Size(196, 20);
-            this.txtSearchBook.TabIndex = 77;
-            // 
             // btnHuy_MUON
             // 
             this.btnHuy_MUON.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnHuy_MUON.Location = new System.Drawing.Point(1284, 483);
+            this.btnHuy_MUON.Location = new System.Drawing.Point(1285, 626);
             this.btnHuy_MUON.Margin = new System.Windows.Forms.Padding(2);
             this.btnHuy_MUON.Name = "btnHuy_MUON";
             this.btnHuy_MUON.Size = new System.Drawing.Size(91, 34);
@@ -604,7 +578,7 @@
             // btnDongY_MUON
             // 
             this.btnDongY_MUON.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDongY_MUON.Location = new System.Drawing.Point(1168, 483);
+            this.btnDongY_MUON.Location = new System.Drawing.Point(1162, 626);
             this.btnDongY_MUON.Margin = new System.Windows.Forms.Padding(2);
             this.btnDongY_MUON.Name = "btnDongY_MUON";
             this.btnDongY_MUON.Size = new System.Drawing.Size(91, 34);
@@ -627,73 +601,41 @@
             this.lbNotify.AutoSize = true;
             this.lbNotify.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbNotify.ForeColor = System.Drawing.Color.Red;
-            this.lbNotify.Location = new System.Drawing.Point(1003, 450);
+            this.lbNotify.Location = new System.Drawing.Point(1001, 592);
             this.lbNotify.Name = "lbNotify";
             this.lbNotify.Size = new System.Drawing.Size(285, 22);
             this.lbNotify.TabIndex = 81;
             this.lbNotify.Text = "Cần nhập đủ và đúng thông tin";
             this.lbNotify.Visible = false;
             // 
-            // dataGridView1
+            // button1
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Checked,
-            this.MaSach,
-            this.TenSach,
-            this.TacGia,
-            this.TenNhaXuatBan});
-            this.dataGridView1.Location = new System.Drawing.Point(925, 310);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(450, 120);
-            this.dataGridView1.TabIndex = 82;
+            this.button1.Location = new System.Drawing.Point(1294, 291);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(84, 29);
+            this.button1.TabIndex = 82;
+            this.button1.Text = "Chọn sách";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // Checked
+            // lbChonSach
             // 
-            this.Checked.HeaderText = "";
-            this.Checked.Name = "Checked";
-            this.Checked.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Checked.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // MaSach
-            // 
-            this.MaSach.HeaderText = "MaSach";
-            this.MaSach.Name = "MaSach";
-            this.MaSach.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.MaSach.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // TenSach
-            // 
-            this.TenSach.HeaderText = "Tên sách";
-            this.TenSach.Name = "TenSach";
-            this.TenSach.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.TenSach.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // TacGia
-            // 
-            this.TacGia.HeaderText = "Tác giả";
-            this.TacGia.Name = "TacGia";
-            this.TacGia.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.TacGia.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // TenNhaXuatBan
-            // 
-            this.TenNhaXuatBan.HeaderText = "Nhà xuất bản";
-            this.TenNhaXuatBan.Name = "TenNhaXuatBan";
-            this.TenNhaXuatBan.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.TenNhaXuatBan.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.lbChonSach.FormattingEnabled = true;
+            this.lbChonSach.Location = new System.Drawing.Point(925, 326);
+            this.lbChonSach.Name = "lbChonSach";
+            this.lbChonSach.Size = new System.Drawing.Size(451, 212);
+            this.lbChonSach.TabIndex = 83;
             // 
             // MuonTraForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1443, 758);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.lbChonSach);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.lbNotify);
             this.Controls.Add(this.btnDongY_MUON);
             this.Controls.Add(this.btnHuy_MUON);
-            this.Controls.Add(this.txtSearchBook);
-            this.Controls.Add(this.label13);
             this.Controls.Add(this.dtNgayTra);
             this.Controls.Add(this.dtNgayMuon);
             this.Controls.Add(this.txtTenDocGia_Muon);
@@ -742,7 +684,6 @@
             this.Load += new System.EventHandler(this.MuonTraForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.gridMuon)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsMuonSach)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -789,8 +730,6 @@
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.DateTimePicker dtNgayMuon;
         private System.Windows.Forms.DateTimePicker dtNgayTra;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.TextBox txtSearchBook;
         private System.Windows.Forms.Button btnHuy_MUON;
         private System.Windows.Forms.Button btnDongY_MUON;
         private System.Windows.Forms.TextBox txtTenDocGia_Muon;
@@ -803,11 +742,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn HanTra;
         private System.Windows.Forms.DataGridViewTextBoxColumn TrangThai;
         private System.Windows.Forms.Label lbNotify;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn Checked;
-        private System.Windows.Forms.DataGridViewTextBoxColumn MaSach;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TenSach;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TacGia;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TenNhaXuatBan;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ListBox lbChonSach;
     }
 }

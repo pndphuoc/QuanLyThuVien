@@ -14,6 +14,7 @@ namespace QuanLyThuVIen.GUI
 {
     public partial class MuonTraForm : Form
     {
+        private List<int> listMaSach;
         public MuonTraForm()
         {
             InitializeComponent();
@@ -100,14 +101,13 @@ namespace QuanLyThuVIen.GUI
         private void btnDongY_MUON_Click(object sender, EventArgs e)
         {
             ChiTietMuon ctm = new ChiTietMuon();
-            if (txtMaDocGia_MUON.Text == null || txtTenDocGia_Muon == null || dtNgayTra.Value > dtNgayMuon.Value || clbChonSach.Items.Count == 0)
+            if (txtMaDocGia_MUON.Text == null || txtTenDocGia_Muon == null || dtNgayTra.Value > dtNgayMuon.Value )
                 lbNotify.Visible = true;
             else
             {
                 ctm.MaDocGia = Convert.ToInt32(txtMaDocGia_MUON.Text);
                 ctm.NgayMuon = dtNgayMuon.Value;
                 ctm.HanTra = dtNgayTra.Value;
-                ctm.SoLuongMuon = clbChonSach.Items.Count;
                 ctm.TrangThai = false;
                 DataChiTietMuon dtCTM = new DataChiTietMuon();
                 bool result = dtCTM.InsertChiTietMuon(ctm);
@@ -136,6 +136,45 @@ namespace QuanLyThuVIen.GUI
                     txtTenDocGia_Muon.Text = docGia.TenDocGia;
             }
 
+        }
+
+        void LoadData(List<int> lstMaSach)
+        {
+            DataSach dtSach = new DataSach();
+            List<Sach> listSach = new List<Sach>();
+            foreach(int i in lstMaSach)
+            {
+                listSach.Add(dtSach.GetSach(i));
+            }
+            lbChonSach.DataSource = listSach;
+            lbChonSach.DisplayMember = "TenSach";
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            var lstSach = new List<Sach>();
+            foreach(var item in lbChonSach.Items)
+            {
+                lstSach.Add((Sach)item);
+            }
+            var lstMaSach = new List<int>();
+            foreach(var item in lstSach)
+            {
+                lstMaSach.Add((int)item.MaSach);
+            }
+            if (lstMaSach.Count > 0)
+            {
+                ChonSachForm f = new ChonSachForm(lstMaSach);
+                f.ShowDialog();
+            }
+            else
+            {
+                ChonSachForm f = new ChonSachForm();
+                f.truyenData = new ChonSachForm.TruyenChoMuonTraForm(LoadData);
+                f.ShowDialog();
+            }
+           
+           
         }
     }
 }
