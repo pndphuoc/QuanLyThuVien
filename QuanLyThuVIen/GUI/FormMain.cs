@@ -30,17 +30,26 @@ namespace QuanLyThuVIen
             this.mainPanel.Controls.Add(f);
             this.mainPanel.Tag = f;
             f.Size = this.mainPanel.Size;
+           
             f.Show();
         }
 
         private void btnBookManager_Click(object sender, EventArgs e)
         {
             loadForm(new BookManagerForm());
+            
         }
 
         private void btnMuonTra_Click(object sender, EventArgs e)
         {
             loadForm(new MuonTraForm());
+        }
+        
+
+        private void btnUserManage_Click_1(object sender, EventArgs e)
+        {
+            loadForm(new UserManagerForm());
+            
         }
 
 
