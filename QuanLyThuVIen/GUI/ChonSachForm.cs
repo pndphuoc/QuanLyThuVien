@@ -17,7 +17,6 @@ namespace QuanLyThuVIen.GUI
         public delegate void TruyenChoMuonTraForm(List<int> lsSach);
         public TruyenChoMuonTraForm truyenData;
         private List<int> lsMaSach;
-
         public ChonSachForm()
         {
             InitializeComponent();
@@ -27,7 +26,6 @@ namespace QuanLyThuVIen.GUI
             InitializeComponent();
             this.lsMaSach = lstMaSach;
         }
-
         private void ChonSachForm_Load(object sender, EventArgs e)
         {
 
@@ -50,7 +48,7 @@ namespace QuanLyThuVIen.GUI
                     {
                         DataGridViewCheckBoxCell cell = (DataGridViewCheckBoxCell)row.Cells["Selected"];
 
-                        cell.Value = cell.FalseValue; // or cell.Value = 0;
+                        cell.Value = 1; // or cell.Value = 0;
                     }
                     //foreach (var item in lsMaSach)
                     //{
@@ -66,6 +64,48 @@ namespace QuanLyThuVIen.GUI
                 }
             }
 
+            GetTacGia(lstSach);
+        }
+
+
+        private void btnApDung_Click(object sender, EventArgs e)
+        {
+            List<int> list = new List<int>();
+            {
+                foreach (DataGridViewRow row in gridChonSach.Rows)
+                {
+                    bool isSelected = Convert.ToBoolean(row.Cells["Selected"].Value);
+                    if (isSelected)
+                    {
+                        list.Add(Convert.ToInt32(row.Cells["MaSach"].Value));
+
+                    }
+                }
+            }
+            DataChiTietMuon dtCTm = new DataChiTietMuon();
+            if (list.Count > 5)
+                MessageBox.Show("Mỗi độc giả chỉ được mượn tối đa 5 quyển sách một lúc!");
+            else
+                truyenData(list);
+        }
+
+        private void btnHuy_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            DataSach dtSach = new DataSach();
+            DataTacGia dtTacGia = new DataTacGia();
+
+            var lstSach = dtSach.SearchSachForSelect(txtSearchSach.Text);
+            bsSach.DataSource = lstSach;
+            GetTacGia(lstSach);
+        }
+        private void GetTacGia(List<SachForSelect> lstSach)
+        {
+            DataTacGia dtTacGia = new DataTacGia();
             foreach (var item in lstSach)
             {
                 string tacgia = "";
@@ -78,25 +118,23 @@ namespace QuanLyThuVIen.GUI
             }
         }
 
-
-        private void btnApDung_Click(object sender, EventArgs e)
+        private void cbSachCon_CheckedChanged(object sender, EventArgs e)
         {
-            List<int> list = new List<int>();
-            foreach (DataGridViewRow row in gridChonSach.Rows)
+            DataSach dtSach = new DataSach();
+            var lstSach = new List<SachForSelect>();
+            if (cbSachCon.Checked)
             {
-                bool isSelected = Convert.ToBoolean(row.Cells["Selected"].Value);
-                if (isSelected)
-                {
-                    list.Add(Convert.ToInt32(row.Cells["MaSach"].Value));
-
-                }
+                lstSach = dtSach.GetListSachConTrongThuVien();
+                bsSach.DataSource = lstSach;
+                GetTacGia(lstSach);
             }
-            truyenData(list);
-        }
+            else
+            {
+                lstSach = dtSach.GetSachForSelect();
+                bsSach.DataSource = lstSach;
+                GetTacGia(lstSach);
 
-        private void btnHuy_Click(object sender, EventArgs e)
-        {
-            this.Close();
+            }
         }
     }
 }

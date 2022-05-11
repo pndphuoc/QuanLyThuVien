@@ -19,12 +19,14 @@ namespace QuanLyThuVIen.GUI
         {
             InitializeComponent();
             DataDocGia_MuonSach dataDGMS = new DataDocGia_MuonSach();
-
+            ///Lấy danh sách các độc giả đang mượn cách
             var lstDGMS = dataDGMS.GetListDocGiaMuonSach();
 
+            //Gán dữ liệu cho GridDataView
             bsMuonSach.DataSource = lstDGMS;
             gridMuon.DataSource = bsMuonSach;
             gridMuon.AutoGenerateColumns = false;
+
 
         }
 
@@ -42,7 +44,11 @@ namespace QuanLyThuVIen.GUI
         {
 
         }
-
+        /// <summary>
+        /// Xử lý khi chọn đối tượng trong GridDataView
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void gridMuon_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             if (e.RowIndex >= 0)
@@ -56,7 +62,7 @@ namespace QuanLyThuVIen.GUI
                 var MaDocGia = Convert.ToInt32(row.Cells[0].Value.ToString());
                 var DocGia = (DocGia)dtDocGia.GetDocGia((int)MaDocGia);
 
-
+                //Hiển thị thông tin độc giả
                 txtTenDocGia.Text = DocGia.TenDocGia;
                 txtChucDanh.Text = DocGia.MaChucDanh.ToString();
                 txtEmail.Text = DocGia.Email;
@@ -65,10 +71,21 @@ namespace QuanLyThuVIen.GUI
                 txtChucDanh.Text = dataChucDanh.GetChucDanh(Convert.ToInt32(DocGia.MaChucDanh)).TenChucDanh;
                 txtMaPhieuMuon.Text = row.Cells["MaChiTietMuon"].Value.ToString();
 
+                //Xử lý DateTime
+                ChiTietMuon ctm = new ChiTietMuon();
+                ctm = dtCTM.GetChiTietMuon(Convert.ToInt32(txtMaPhieuMuon.Text));
+                txtHanTra.Text = ctm.HanTra.ToString("dd/MM/yyyy");
+                txtNgayMuon.Text = ctm.NgayMuon.ToString("dd/MM/yyyy");
+                if (DateTime.Now > ctm.HanTra)
+                {
+                    labelQuaHan.Visible = true;
+                }
+                else
+                {
+                    labelQuaHan.Visible = false;
+                }
 
-                txtHanTra.Text = dtCTM.GetChiTietMuon(Convert.ToInt32(txtMaPhieuMuon.Text)).HanTra.ToString("dd/MM/yyyy");
-                txtNgayMuon.Text = dtCTM.GetChiTietMuon(Convert.ToInt32(txtMaPhieuMuon.Text)).NgayMuon.ToString("dd/MM/yyyy");
-
+                //Lấy danh sách sách mượn của độc giả
                 var lstSach = dtSach.GetListSach(Convert.ToInt32(txtMaPhieuMuon.Text));
                 lbDangMuon.DataSource = lstSach;
                 lbDangMuon.DisplayMember = "TenSach";
@@ -101,23 +118,27 @@ namespace QuanLyThuVIen.GUI
         private void btnDongY_MUON_Click(object sender, EventArgs e)
         {
             ChiTietMuon ctm = new ChiTietMuon();
-            if (txtMaDocGia_MUON.Text == null || txtTenDocGia_Muon == null || dtNgayTra.Value > dtNgayMuon.Value )
+            if (txtMaDocGia_MUON.Text == null || txtTenDocGia_Muon == null || listMaSach == null)
                 lbNotify.Visible = true;
             else
             {
+                ctm.SoLuongMuon = Convert.ToInt32(labelSoLuongSachChon.Text);
                 ctm.MaDocGia = Convert.ToInt32(txtMaDocGia_MUON.Text);
                 ctm.NgayMuon = dtNgayMuon.Value;
                 ctm.HanTra = dtNgayTra.Value;
                 ctm.TrangThai = false;
                 DataChiTietMuon dtCTM = new DataChiTietMuon();
-                bool result = dtCTM.InsertChiTietMuon(ctm);
-                if (result)
+                if (dtCTM.GetSoLuongDangMuon(ctm.MaDocGia) + Convert.ToInt32(labelSoLuongSachChon.Text) > 5)
                 {
+                    MessageBox.Show("Mỗi độc giả chỉ được mượn tối đa 5 quyển sách 1 lúc");
+                }
+                else
+                {
+                    int MaChiTietMuon = dtCTM.InsertChiTietMuon(ctm);
+                    dtCTM.InsertSach_ChiTietMuon(MaChiTietMuon, listMaSach);
                     MessageBox.Show("Thêm thành công!");
 
                 }
-                else
-                    MessageBox.Show("Thêm thất bại! Vui lòng kiểm tra lại");
             }
         }
 
@@ -142,29 +163,34 @@ namespace QuanLyThuVIen.GUI
         {
             DataSach dtSach = new DataSach();
             List<Sach> listSach = new List<Sach>();
-            foreach(int i in lstMaSach)
+            foreach (int i in lstMaSach)
             {
                 listSach.Add(dtSach.GetSach(i));
             }
             lbChonSach.DataSource = listSach;
             lbChonSach.DisplayMember = "TenSach";
+            labelSoLuongSachChon.Text = lbChonSach.Items.Count.ToString();
+
+            ///Gán danh sách mã sách được nhập từ form Thêm sách vào biến toàn cục listSach
+            listMaSach = lstMaSach;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             var lstSach = new List<Sach>();
-            foreach(var item in lbChonSach.Items)
+            foreach (var item in lbChonSach.Items)
             {
                 lstSach.Add((Sach)item);
             }
             var lstMaSach = new List<int>();
-            foreach(var item in lstSach)
+            foreach (var item in lstSach)
             {
                 lstMaSach.Add((int)item.MaSach);
             }
             if (lstMaSach.Count > 0)
             {
                 ChonSachForm f = new ChonSachForm(lstMaSach);
+                f.truyenData = new ChonSachForm.TruyenChoMuonTraForm(LoadData);
                 f.ShowDialog();
             }
             else
@@ -173,8 +199,8 @@ namespace QuanLyThuVIen.GUI
                 f.truyenData = new ChonSachForm.TruyenChoMuonTraForm(LoadData);
                 f.ShowDialog();
             }
-           
-           
+
+
         }
     }
 }

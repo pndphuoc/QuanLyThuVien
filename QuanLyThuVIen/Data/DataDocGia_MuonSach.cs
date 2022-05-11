@@ -19,8 +19,8 @@ namespace QuanLyThuVIen.Data
         {
             using (var cnn = DbUtils.GetConnection())
             {
-                var sql = @"select dg.MaDocGia, ctm.MaChiTietMuon, dg.TenDocGia, ctm.NgayMuon, ctm.SoLuongMuon, ctm.HanTra, ctm.TrangThai 
-                            from DocGia as dg join ChiTietMuon as ctm on ctm.MaDocGia = dg.MaDocGia";
+                var sql = @"select dg.MaDocGia, ctm.MaChiTietMuon, dg.TenDocGia, ctm.NgayMuon, ctm.SoLuongMuon, ctm.HanTra
+                            from DocGia as dg join ChiTietMuon as ctm on ctm.MaDocGia = dg.MaDocGia where ctm.TrangThai = 0";
                 var lstSach = cnn.Query<DocGia_MuonSach>(sql).ToList();
                 return lstSach;
             }
@@ -31,7 +31,7 @@ namespace QuanLyThuVIen.Data
             using (var cnn = DbUtils.GetConnection())
             {
                 var sql = @"select dg.MaDocGia, ctm.MaChiTietMuon, dg.TenDocGia, ctm.NgayMuon, ctm.SoLuongMuon, ctm.HanTra, ctm.TrangThai 
-                            from DocGia as dg join ChiTietMuon as ctm on ctm.MaDocGia = dg.MaDocGia where ctm.TrangThai = 1";
+                            from DocGia as dg join ChiTietMuon as ctm on ctm.MaDocGia = dg.MaDocGia where DATEADD(dd, 0, DATEDIFF(dd, 0, GETDATE()))> ctm.HanTra";
                 var lstSach = cnn.Query<DocGia_MuonSach>(sql).ToList();
                 return lstSach;
             }

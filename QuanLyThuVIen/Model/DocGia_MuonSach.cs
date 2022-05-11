@@ -14,7 +14,6 @@ namespace QuanLyThuVIen.Model
         public DateTime NgayMuon { get; set; }
         public int SoLuongMuon { get; set; }
         public DateTime HanTra { get; set; }
-        public bool TrangThai { get; set; }
 
     }
 }

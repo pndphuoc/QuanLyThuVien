@@ -200,8 +200,37 @@ namespace QuanLyThuVIen.Data
             }
         }
 
+        public List<SachForSelect> SearchSachForSelect(string tenSach)
+        {
+            using (var cnn = DbUtils.GetConnection())
+            {
+                string search = "%" + tenSach + "%";
+                var sql = @"SELECT s.MaSach, s.TenSach,nxb.TenNhaXuatBan, s.SoLuongCon
+                from Sach as s inner join NhaXuatBan as nxb on nxb.MaNhaXuatBan = s.MaNhaXuatBan
+                where TenSach like @TenSach";
 
+                var param = new
+                {
+                    TenSach = search
+                };
 
+                var lstSach = cnn.Query<SachForSelect>(sql, param).ToList();
+                return lstSach;
+            }
+        }
+
+        public List<SachForSelect> GetListSachConTrongThuVien()
+        {
+            using (var cnn = DbUtils.GetConnection())
+            {
+                var sql = @"SELECT s.MaSach, s.TenSach,nxb.TenNhaXuatBan, s.SoLuongCon
+                from Sach as s inner join NhaXuatBan as nxb on nxb.MaNhaXuatBan = s.MaNhaXuatBan
+                where s.SoLuongCon > 0";
+
+                var lstSach = cnn.Query<SachForSelect>(sql).ToList();
+                return lstSach;
+            }
+        }
     }
 }
 
