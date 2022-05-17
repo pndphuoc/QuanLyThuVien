@@ -52,6 +52,11 @@ namespace QuanLyThuVIen
             
         }
 
+        private void btnUserManage_Click(object sender, EventArgs e)
+        {
+
+        }
+
 
 
         //private void gridSach_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -126,29 +131,6 @@ namespace QuanLyThuVIen
         //        txtSoLuong.Text = currentSach.SoLuong.ToString();
         //    }
         //}
-
-
-        //private void TabControl_SelectedIndexChanged(object sender, EventArgs e)
-        //{
-        //    switch (TabControl.SelectedIndex)
-        //    {
-        //        case 0:
-        //            break;
-        //        case 1:
-        //            int currentTab = TabControl.SelectedIndex;
-        //            string tabText = TabControl.TabPages[currentTab].Text;
-        //            btnRefresh.Show();
-        //            btnRefresh.PerformClick();
-        //            btnRefresh.Hide();
-        //            break;
-        //    }
-        //}
-
-        //private void cbTacGia_KeyPress(object sender, KeyPressEventArgs e)
-        //{
-        //    e.Handled = true;
-        //}
-
 
 
 
