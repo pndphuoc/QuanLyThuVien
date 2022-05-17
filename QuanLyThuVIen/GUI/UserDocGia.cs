@@ -58,7 +58,7 @@ namespace QuanLyThuVIen.GUI
             if (cbbTrangThai.SelectedItem != null)
             {
                 var MaTrangThai = ((TrangThai)cbbTrangThai.SelectedItem).MaTrangThai;
-                lstDG = dociga.GetListDocGia2(MaTrangThai);
+                lstDG = dociga.GetListDocGia3(MaTrangThai);
                 bsDocGia.DataSource = lstDG;
                 GridDocGia.DataSource = bsDocGia;
 
@@ -135,14 +135,75 @@ namespace QuanLyThuVIen.GUI
             frm.StartPosition = FormStartPosition.CenterParent;
             if (frm.ShowDialog() == DialogResult.OK)
             {
+                    UserDocGia_Load();
             }
             }
 
 
         }
 
-        
+        private void tbTimKiem_TextChanged(object sender, EventArgs e)
+        {
+            var dociga1 = new DataDocGia();
+            var lstDG1 = dociga1.TimkiemDocGia(tbTimKiem.Text.Trim());
+            bsDocGia.DataSource = lstDG1;
+            GridDocGia.DataSource = bsDocGia;
+        }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            var frm = new UserThemDocGia();
+            frm.StartPosition = FormStartPosition.CenterParent;
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                UserDocGia_Load();
+            }
+        }
 
+        public void UserDocGia_Load()
+        {
+            var dociga = new DataDocGia();
+            var lstDG = dociga.GetListDocGia();
+            bsDocGia.DataSource = lstDG;
+            GridDocGia.DataSource = bsDocGia;
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            if (MaDocGia > 0)
+            {
+            var frm = new UserThemDocGia(MaDocGia);
+            frm.StartPosition = FormStartPosition.CenterParent;
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                UserDocGia_Load();
+            }
+            }
+        }
+
+        private void cbbGioiTinh_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (MaDocGia > 0)
+            {
+                MessageBox.Show("Bạn muốn xóa Độc giả này hay không?");
+                var DocGia = new DataDocGia();
+                if (DocGia.InUsedDG(MaDocGia)!=1)
+                {
+                    if (DocGia.DeleteDG(MaDocGia))
+                        MessageBox.Show("Xóa độc giả thành công!");
+                    UserDocGia_Load();
+                }
+                else
+                {
+                    MessageBox.Show("Độc giả này đang mượn sách!");
+                }
+                    
+            }
+        }
     }
 }

@@ -23,5 +23,6 @@ namespace QuanLyThuVIen.Model
         public int KhoaHoc { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
+        public int MaTrangThai { get; set; }
     }
 }

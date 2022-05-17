@@ -262,6 +262,7 @@ namespace QuanLyThuVIen.GUI
             this.bttMuonTra.TabIndex = 2;
             this.bttMuonTra.Text = "Lịch sử mượn trả";
             this.bttMuonTra.UseVisualStyleBackColor = false;
+            this.bttMuonTra.Click += new System.EventHandler(this.bttMuonTra_Click);
             // 
             // button3
             // 
