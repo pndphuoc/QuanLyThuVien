@@ -95,10 +95,7 @@ namespace QuanLyThuVIen.Data
         {
             using (var cnn = DbUtils.GetConnection())
             {
-                var sql = @"select Max(MaDocGia) from DocGia";
-
-                
-
+                var sql = @"select Max(MaDocGia) from DocGia";               
                 int result = Convert.ToInt32(cnn.ExecuteScalar(sql));
                 return result;
             }
