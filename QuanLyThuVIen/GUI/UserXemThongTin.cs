@@ -42,5 +42,16 @@ namespace QuanLyThuVIen.GUI
         {
             this.Close();
         }
+
+        private void bttMuonTra_Click(object sender, EventArgs e)
+        {
+            var frm = new UserLichSuMuonTra(MaDocGia);
+            frm.StartPosition = FormStartPosition.CenterParent;
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                
+            }
+        }
     }
-}
+ }
+

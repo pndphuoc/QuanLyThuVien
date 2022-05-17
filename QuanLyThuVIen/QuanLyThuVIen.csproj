@@ -70,6 +70,7 @@
     <Compile Include="Data\DataTrangThai.cs" />
     <Compile Include="Data\DbUtils.cs" />
     <Compile Include="Data\DataDocGia_MuonSach.cs" />
+    <Compile Include="Data\LichSuMuonTra.cs" />
     <Compile Include="GUI\BookManagerForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -119,11 +120,23 @@
     <Compile Include="GUI\TraSachForm.Designer.cs">
       <DependentUpon>TraSachForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUI\UserLichSuMuonTra.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\UserLichSuMuonTra.Designer.cs">
+      <DependentUpon>UserLichSuMuonTra.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI\UserManagerForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="GUI\UserManagerForm.Designer.cs">
       <DependentUpon>UserManagerForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\UserThemDocGia.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\UserThemDocGia.Designer.cs">
+      <DependentUpon>UserThemDocGia.cs</DependentUpon>
     </Compile>
     <Compile Include="GUI\UserXemThongTin.cs">
       <SubType>Form</SubType>
@@ -131,10 +144,12 @@
     <Compile Include="GUI\UserXemThongTin.Designer.cs">
       <DependentUpon>UserXemThongTin.cs</DependentUpon>
     </Compile>
+    <Compile Include="Model\ChiTietMuon.cs" />
     <Compile Include="Model\ChucDanh.cs" />
     <Compile Include="Model\DocGia.cs" />
     <Compile Include="Model\DocGia_MuonSach.cs" />
     <Compile Include="Model\Khoa.cs" />
+    <Compile Include="Model\LichSuMuon.cs" />
     <Compile Include="Model\NgonNgu.cs" />
     <Compile Include="Model\NhaXuatBan.cs" />
     <Compile Include="Model\Sach.cs" />
@@ -167,8 +182,14 @@
     <EmbeddedResource Include="GUI\TraSachForm.resx">
       <DependentUpon>TraSachForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="GUI\UserLichSuMuonTra.resx">
+      <DependentUpon>UserLichSuMuonTra.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GUI\UserManagerForm.resx">
       <DependentUpon>UserManagerForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\UserThemDocGia.resx">
+      <DependentUpon>UserThemDocGia.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\UserXemThongTin.resx">
       <DependentUpon>UserXemThongTin.cs</DependentUpon>

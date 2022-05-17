@@ -14,7 +14,7 @@ namespace QuanLyThuVIen.Data
         {
             try
             {
-                var connectionString = "Server=LAPCN-i-quang-nd;Database=QuanLyThuVien;User Id=sa;Password=123;";
+                var connectionString = "Server=DUYPHUOC;Database=QuanLyThuVien;User Id=sa;Password=123;";
                 var cnn = new SqlConnection(connectionString);
 
                 cnn.Open();
