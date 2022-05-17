@@ -18,11 +18,50 @@ namespace QuanLyThuVIen.Data
         {
             using (var cnn = DbUtils.GetConnection())
             {
-                //var sql = @"SELECT s.MaSach, s.TenSach,nxb.MaNhaXuatBan, nxb.TenNhaXuatBan, s.DonGia, s.MaNgonNgu, s.NamXuatBan, s.SoLuong, s.SoTaiBan,s.TinhTrang 
-                //            from Sach as s inner join NhaXuatBan as nxb on nxb.MaNhaXuatBan = s.MaNhaXuatBan";
+              
                 var sql = "select * from DocGia";
                 var lstDocGia = cnn.Query<DocGia>(sql).ToList();
                 return lstDocGia;
+            }
+        }
+        public List<DocGia> GetListDocGia1(int MaKhoa)
+        {
+            using (var cnn = DbUtils.GetConnection())
+            {
+                var sql = "select * from DocGia where MaKhoa=@MaKhoa";
+                var param = new
+                {
+                    MaKhoa = MaKhoa
+                };
+                var lstSach = cnn.Query<DocGia>(sql, param).ToList();
+                return lstSach;
+            }
+        }
+        public List<DocGia> GetListDocGia2(int MaChucDanh)
+        {
+            using (var cnn = DbUtils.GetConnection())
+            {
+                var sql = "select * from DocGia where MaChucDanh=@MaChucDanh";
+                var param = new
+                {
+                    MaChucDanh = MaChucDanh
+                };
+                var lstSach = cnn.Query<DocGia>(sql, param).ToList();
+                return lstSach;
+            }
+        }
+
+        public List<DocGia> GetListDocGia3(int MaTrangThai)
+        {
+            using (var cnn = DbUtils.GetConnection())
+            {
+                var sql = "select * from DocGia where MaTrangThai=@MaTrangThai";
+                var param = new
+                {
+                    MaTrangThai = MaTrangThai
+                };
+                var lstSach = cnn.Query<DocGia>(sql, param).ToList();
+                return lstSach;
             }
         }
         /// <summary>
