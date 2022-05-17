@@ -76,15 +76,14 @@ namespace QuanLyThuVIen.Data
                 //            from Sach as s inner join NhaXuatBan as nxb on nxb.MaNhaXuatBan = s.MaNhaXuatBan";
                 try
                 {
+                var sql = "select * from DocGia where MaDocGia = @MaDocGia";
+                var param = new
+                {
+                    MaDocGia = MaDocGia
+                };
 
-                    var sql = "select * from DocGia where MaDocGia = @MaDocGia";
-                    var param = new
-                    {
-                        MaDocGia = MaDocGia
-                    };
-
-                    var lstDocGia = cnn.Query<DocGia>(sql, param).ToList();
-                    return lstDocGia[0];
+                var lstDocGia = cnn.Query<DocGia>(sql, param).ToList();
+                return lstDocGia[0];
                 }
                 catch (Exception ex)
                 {
