@@ -63,12 +63,16 @@
     <Compile Include="Data\DataChiTietTra.cs" />
     <Compile Include="Data\DataChucDanh.cs" />
     <Compile Include="Data\DataDocGia.cs" />
+    <Compile Include="Data\DataChucDanh.cs" />
+    <Compile Include="Data\DataDocGia.cs" />
+    <Compile Include="Data\DataKhoa.cs" />
     <Compile Include="Data\DataLoaiSach.cs" />
     <Compile Include="Data\DataNgonNgu.cs" />
     <Compile Include="Data\DataNXB.cs" />
     <Compile Include="Data\DataSach.cs" />
     <Compile Include="Data\DataTacGia.cs" />
     <Compile Include="Data\DataViPham.cs" />
+    <Compile Include="Data\DataTrangThai.cs" />
     <Compile Include="Data\DbUtils.cs" />
     <Compile Include="Data\DataDocGia_MuonSach.cs" />
     <Compile Include="GUI\BookManagerForm.cs">
@@ -94,6 +98,12 @@
     </Compile>
     <Compile Include="GUI\FormGiaHan.Designer.cs">
       <DependentUpon>FormGiaHan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\UserDocGia.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\UserDocGia.Designer.cs">
+      <DependentUpon>UserDocGia.cs</DependentUpon>
     </Compile>
     <Compile Include="GUI\FormMain.cs">
       <SubType>Form</SubType>
@@ -136,7 +146,22 @@
     <Compile Include="Model\ChiTietTra.cs" />
     <Compile Include="Model\ChucDanh.cs" />
     <Compile Include="Model\DocGia.cs" />
+    <Compile Include="GUI\UserManagerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\UserManagerForm.Designer.cs">
+      <DependentUpon>UserManagerForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\UserXemThongTin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\UserXemThongTin.Designer.cs">
+      <DependentUpon>UserXemThongTin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ChucDanh.cs" />
+    <Compile Include="Model\DocGia.cs" />
     <Compile Include="Model\DocGia_MuonSach.cs" />
+    <Compile Include="Model\Khoa.cs" />
     <Compile Include="Model\NgonNgu.cs" />
     <Compile Include="Model\NhaXuatBan.cs" />
     <Compile Include="Model\Sach.cs" />
@@ -145,6 +170,7 @@
     <Compile Include="Model\TacGia.cs" />
     <Compile Include="Model\LoaiSach.cs" />
     <Compile Include="Model\ViPham.cs" />
+    <Compile Include="Model\TrangThai.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="GUI\BookManagerForm.resx">
       <DependentUpon>BookManagerForm.cs</DependentUpon>
@@ -157,6 +183,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\FormGiaHan.resx">
       <DependentUpon>FormGiaHan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\UserDocGia.resx">
+      <DependentUpon>UserDocGia.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
@@ -176,6 +205,12 @@
     <EmbeddedResource Include="GUI\TraSachForm.resx">
       <DependentUpon>TraSachForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="GUI\UserManagerForm.resx">
+      <DependentUpon>UserManagerForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\UserXemThongTin.resx">
+      <DependentUpon>UserXemThongTin.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -184,6 +219,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -201,6 +237,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="images\Sach\images.jpg" />
+    <None Include="Resources\gai.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
