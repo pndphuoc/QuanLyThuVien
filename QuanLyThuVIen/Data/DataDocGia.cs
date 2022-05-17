@@ -19,8 +19,8 @@ namespace QuanLyThuVIen.Data
             using (var cnn = DbUtils.GetConnection())
             {
                 var sql = "select * from DocGia";
-                var lstSach = cnn.Query<DocGia>(sql).ToList();
-                return lstSach;
+                var lstDocGia = cnn.Query<DocGia>(sql).ToList();
+                return lstDocGia;
             }
         }
         public List<DocGia> GetListDocGia1(int MaKhoa)
@@ -96,9 +96,6 @@ namespace QuanLyThuVIen.Data
             using (var cnn = DbUtils.GetConnection())
             {
                 var sql = @"select Max(MaDocGia) from DocGia";
-
-
-
                 int result = Convert.ToInt32(cnn.ExecuteScalar(sql));
                 return result;
             }
