@@ -36,10 +36,10 @@
             this.btnCategoryManage = new System.Windows.Forms.Button();
             this.btnUserManage = new System.Windows.Forms.Button();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnMuonTra = new System.Windows.Forms.Button();
             this.btnBorrowGiveBack = new System.Windows.Forms.Button();
             this.mainPanel = new System.Windows.Forms.Panel();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.btnMuonTra = new System.Windows.Forms.Button();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -86,12 +86,13 @@
             // btnHome
             // 
             this.btnHome.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnHome.BackColor = System.Drawing.Color.BlueViolet;
             this.btnHome.Location = new System.Drawing.Point(3, 3);
             this.btnHome.Name = "btnHome";
             this.btnHome.Size = new System.Drawing.Size(94, 51);
             this.btnHome.TabIndex = 18;
             this.btnHome.Text = "Trang chủ";
-            this.btnHome.UseVisualStyleBackColor = true;
+            this.btnHome.UseVisualStyleBackColor = false;
             // 
             // btnCategoryManage
             // 
@@ -129,6 +130,17 @@
             this.flowLayoutPanel1.Size = new System.Drawing.Size(852, 57);
             this.flowLayoutPanel1.TabIndex = 24;
             // 
+            // btnMuonTra
+            // 
+            this.btnMuonTra.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnMuonTra.Location = new System.Drawing.Point(403, 3);
+            this.btnMuonTra.Name = "btnMuonTra";
+            this.btnMuonTra.Size = new System.Drawing.Size(94, 51);
+            this.btnMuonTra.TabIndex = 24;
+            this.btnMuonTra.Text = "Quản lý mượn trả";
+            this.btnMuonTra.UseVisualStyleBackColor = true;
+            this.btnMuonTra.Click += new System.EventHandler(this.btnMuonTra_Click);
+            // 
             // btnBorrowGiveBack
             // 
             this.btnBorrowGiveBack.Anchor = System.Windows.Forms.AnchorStyles.None;
@@ -146,17 +158,6 @@
             this.mainPanel.Name = "mainPanel";
             this.mainPanel.Size = new System.Drawing.Size(852, 475);
             this.mainPanel.TabIndex = 25;
-            // 
-            // btnMuonTra
-            // 
-            this.btnMuonTra.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnMuonTra.Location = new System.Drawing.Point(403, 3);
-            this.btnMuonTra.Name = "btnMuonTra";
-            this.btnMuonTra.Size = new System.Drawing.Size(94, 51);
-            this.btnMuonTra.TabIndex = 24;
-            this.btnMuonTra.Text = "Quản lý mượn trả";
-            this.btnMuonTra.UseVisualStyleBackColor = true;
-            this.btnMuonTra.Click += new System.EventHandler(this.btnMuonTra_Click);
             // 
             // FormMain
             // 

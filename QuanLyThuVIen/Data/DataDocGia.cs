@@ -63,8 +63,22 @@ namespace QuanLyThuVIen.Data
 
                 
 
-                int result = (int)cnn.ExecuteScalar(sql);
+                int result = Convert.ToInt32(cnn.ExecuteScalar(sql));
                 return result;
+            }
+        }
+
+        public int GetMaDocGia(int MaChiTietMuon)
+        {
+            using (var cnn = DbUtils.GetConnection())
+            {
+                var sql = @"select MaDocGia from ChiTietMuon where MaChiTietMuon = @MaChiTietMuon";
+                var param = new
+                {
+                    MaChiTietMuon = MaChiTietMuon
+                };
+                int MaDocGia = Convert.ToInt32(cnn.ExecuteScalar(sql, param));
+                return MaDocGia;
             }
         }
     }

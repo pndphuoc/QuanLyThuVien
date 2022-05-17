@@ -15,6 +15,7 @@ namespace QuanLyThuVIen.GUI
     public partial class MuonTraForm : Form
     {
         private List<int> listMaSach;
+        private int MaDocGiaGlobal;
         public MuonTraForm()
         {
             InitializeComponent();
@@ -30,6 +31,16 @@ namespace QuanLyThuVIen.GUI
 
         }
 
+        private void Reload()
+        {
+            DataDocGia_MuonSach dataDGMS = new DataDocGia_MuonSach();
+            var lstDGMS = dataDGMS.GetListDocGiaMuonSach();
+
+            //Gán dữ liệu cho GridDataView
+            bsMuonSach.DataSource = lstDGMS;
+            gridMuon.DataSource = bsMuonSach;
+            gridMuon.AutoGenerateColumns = false;
+        }
         private void MuonTraForm_Load(object sender, EventArgs e)
         {
 
@@ -53,12 +64,13 @@ namespace QuanLyThuVIen.GUI
         {
             if (e.RowIndex >= 0)
             {
+                btnTraSach.Enabled = true;
                 DataGridViewRow row = gridMuon.Rows[e.RowIndex];
                 DataDocGia dtDocGia = new DataDocGia();
                 DataChiTietMuon dtCTM = new DataChiTietMuon();
                 DataSach dtSach = new DataSach();
 
-
+                MaDocGiaGlobal = Convert.ToInt32(row.Cells[0].Value.ToString());
                 var MaDocGia = Convert.ToInt32(row.Cells[0].Value.ToString());
                 var DocGia = (DocGia)dtDocGia.GetDocGia((int)MaDocGia);
 
@@ -76,7 +88,7 @@ namespace QuanLyThuVIen.GUI
                 ctm = dtCTM.GetChiTietMuon(Convert.ToInt32(txtMaPhieuMuon.Text));
                 txtHanTra.Text = ctm.HanTra.ToString("dd/MM/yyyy");
                 txtNgayMuon.Text = ctm.NgayMuon.ToString("dd/MM/yyyy");
-                if (DateTime.Now > ctm.HanTra)
+                if (DateTime.Now.Date > ctm.HanTra)
                 {
                     labelQuaHan.Visible = true;
                 }
@@ -96,8 +108,14 @@ namespace QuanLyThuVIen.GUI
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
             DataDocGia_MuonSach dtDocGiaMuonSach = new DataDocGia_MuonSach();
-            bsMuonSach.DataSource = dtDocGiaMuonSach.Search(txtSearch.Text);
-            gridMuon.DataSource = bsMuonSach;
+            var s = dtDocGiaMuonSach.Search(txtSearch.Text);
+            if (s.Count == 0)
+                bsMuonSach.DataSource = null;
+            else
+            {
+                bsMuonSach.DataSource = dtDocGiaMuonSach.Search(txtSearch.Text);
+                gridMuon.DataSource = bsMuonSach;
+            }
         }
 
         private void cbQuaHan_CheckedChanged(object sender, EventArgs e)
@@ -110,7 +128,7 @@ namespace QuanLyThuVIen.GUI
             }
             else
             {
-                bsMuonSach.DataSource = dtDocGiaMuonSach.Search(txtSearch.Text);
+                bsMuonSach.DataSource = dtDocGiaMuonSach.GetListDocGiaMuonSach();
                 gridMuon.DataSource = bsMuonSach;
             }
         }
@@ -118,7 +136,7 @@ namespace QuanLyThuVIen.GUI
         private void btnDongY_MUON_Click(object sender, EventArgs e)
         {
             ChiTietMuon ctm = new ChiTietMuon();
-            if (txtMaDocGia_MUON.Text == null || txtTenDocGia_Muon == null || listMaSach == null)
+            if (string.IsNullOrWhiteSpace(txtMaDocGia_MUON.Text)|| string.IsNullOrWhiteSpace(txtTenDocGia_Muon.Text) || listMaSach == null)
                 lbNotify.Visible = true;
             else
             {
@@ -137,7 +155,12 @@ namespace QuanLyThuVIen.GUI
                     int MaChiTietMuon = dtCTM.InsertChiTietMuon(ctm);
                     dtCTM.InsertSach_ChiTietMuon(MaChiTietMuon, listMaSach);
                     MessageBox.Show("Thêm thành công!");
-
+                    txtMaDocGia_MUON.Text = null;
+                    dtNgayMuon.Value = DateTime.Now.Date;
+                    dtNgayMuon.Value = DateTime.Now.Date;
+                    txtNhanVien_MUON.Text = null;
+                    lbChonSach.DataSource = null;
+                    Reload();
                 }
             }
         }
@@ -201,6 +224,45 @@ namespace QuanLyThuVIen.GUI
             }
 
 
+        }
+
+        private void  btnTraSach_Click(object sender, EventArgs e)
+        {
+            if (gridMuon.SelectedRows != null)
+            {
+                if (!string.IsNullOrWhiteSpace(txtMaPhieuMuon.Text))
+                {
+                    FormTraSach f = new FormTraSach(Convert.ToInt32(txtMaPhieuMuon.Text));
+                    DialogResult dr = f.ShowDialog();
+                    if (dr == DialogResult.OK)
+                    {
+                        Reload();
+                        txtTenDocGia.Text = null;
+                        txtChucDanh.Text = null;
+                        txtEmail.Text = null;
+                        txtDienThoai.Text = null;
+                        DataChucDanh dataChucDanh = new DataChucDanh();
+                        txtChucDanh.Text = null;
+                        txtMaPhieuMuon.Text = null;
+                        txtNgayMuon.Text = null;
+                        txtHanTra.Text = null;
+                        lbDangMuon.DataSource = null;
+                    }
+                }
+
+            }
+
+        }
+
+        private void txtMaPhieuMuon_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnGiaHan_Click(object sender, EventArgs e)
+        {
+            FormGiaHan f = new FormGiaHan(Convert.ToInt32(txtMaPhieuMuon.Text), MaDocGiaGlobal, lbDangMuon);
+            f.ShowDialog();
         }
     }
 }

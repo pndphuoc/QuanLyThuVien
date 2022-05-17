@@ -37,7 +37,7 @@ namespace QuanLyThuVIen.Data
             {
                 //var sql = @"SELECT s.MaSach, s.TenSach,nxb.MaNhaXuatBan, nxb.TenNhaXuatBan, s.DonGia, s.MaNgonNgu, s.NamXuatBan, s.SoLuong, s.SoTaiBan,s.TinhTrang 
                 //            from Sach as s inner join NhaXuatBan as nxb on nxb.MaNhaXuatBan = s.MaNhaXuatBan";
-                var sql = "select * from Sach_ChiTietMuon as sctm join Sach as s on s.MaSach = sctm.MaSach where sctm.MaChiTietMuon = @MaChiTietMuon";
+                var sql = "select * from Sach_ChiTietMuon as sctm join Sach as s on s.MaSach = sctm.MaSach where sctm.MaChiTietMuon = @MaChiTietMuon and sctm.TrangThai = 0";
                 var param = new
                 {
                     @MaChiTietMuon = MaChiTietMuon
@@ -68,6 +68,22 @@ namespace QuanLyThuVIen.Data
                 var sql = @"SELECT s.MaSach, s.TenSach,nxb.TenNhaXuatBan, s.SoLuongCon
                             from Sach as s inner join NhaXuatBan as nxb on nxb.MaNhaXuatBan = s.MaNhaXuatBan";
                 var lstSach = cnn.Query<SachForSelect>(sql).ToList();
+                return lstSach;
+            }
+        }
+
+        public List<SachForSelect> GetSachForSelect(int MaChiTietMuon)
+        {
+            using (var cnn = DbUtils.GetConnection())
+            {
+                var sql = @"SELECT s.MaSach, s.TenSach,nxb.TenNhaXuatBan, s.SoLuongCon
+                            from Sach as s inner join NhaXuatBan as nxb on nxb.MaNhaXuatBan = s.MaNhaXuatBan
+                                join Sach_ChiTietMuon as sctm on sctm.MaSach = s.MaSach where sctm.MaChiTietMuon = @MaChiTietMuon and sctm.TrangThai = 0";
+                var param = new
+                {
+                    MaChiTietMuon = MaChiTietMuon
+                };
+                var lstSach = cnn.Query<SachForSelect>(sql, param).ToList();
                 return lstSach;
             }
         }

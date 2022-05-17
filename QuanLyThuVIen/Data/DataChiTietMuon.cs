@@ -37,7 +37,7 @@ namespace QuanLyThuVIen.Data
             {
                 //var sql = @"SELECT s.MaSach, s.TenSach,nxb.MaNhaXuatBan, nxb.TenNhaXuatBan, s.DonGia, s.MaNgonNgu, s.NamXuatBan, s.SoLuong, s.SoTaiBan,s.TinhTrang 
                 //            from Sach as s inner join NhaXuatBan as nxb on nxb.MaNhaXuatBan = s.MaNhaXuatBan";
-                var sql = "select * from ChiTietMuon where MaChiTietMuon = @MaChiTietMuon";
+                var sql = "select * from ChiTietMuon where MaChiTietMuon = @MaChiTietMuon and TrangThai = 0";
                 var param = new
                 {
                     @MaChiTietMuon = MaChiTietMuon
@@ -92,7 +92,7 @@ namespace QuanLyThuVIen.Data
         {
             using (var cnn = DbUtils.GetConnection())
             {
-                var sql = @"insert into Sach_ChiTietMuon values (@MaChiTietMuon, @MaSach)";
+                var sql = @"insert into Sach_ChiTietMuon (MaChiTietMuon, MaSach, TrangThai) values (@MaChiTietMuon, @MaSach, 0)";
                 foreach (var item in lstMaSach)
                 {
                     var param = new
@@ -101,6 +101,38 @@ namespace QuanLyThuVIen.Data
                         MaSach = item
                     };
                     cnn.Execute(sql, param);
+                }
+            }
+        }
+
+        public void UpdateDaTra_ChiTietMuon(int MaChiTietMuon, List<int> lstSach)
+        {
+            using (var cnn = DbUtils.GetConnection())
+            {
+                foreach (var item in lstSach)
+                {
+                    var sql = @"Update Sach_ChiTietMuon set TrangThai = 1 where MaChiTietMuon = @MaCTM and MaSach = @MaSach";
+                    var param = new
+                    {
+                        MaSach = item,
+                        MaCTM = MaChiTietMuon
+                    };
+                    cnn.Execute(sql, param);
+                }
+                var sql1 = "select count(*) from Sach_ChiTietMuon where MaChiTietMuon = @MaCTM and TrangThai = 0";
+                var param1 = new
+                {
+                    MaCTM = MaChiTietMuon
+                };
+                int count = Convert.ToInt32(cnn.ExecuteScalar(sql1, param1));
+                if (count == 0)
+                {
+                    var sql2 = "update ChiTietMuon set TrangThai = 1 where MaChiTietMuon = @MaCTM";
+                    var param2 = new
+                    {
+                        MaCTM = MaChiTietMuon
+                    };
+                    cnn.Execute(sql2, param2);
                 }
             }
         }

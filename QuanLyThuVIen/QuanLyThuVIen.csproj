@@ -60,6 +60,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\DataChiTietMuon.cs" />
+    <Compile Include="Data\DataChiTietTra.cs" />
     <Compile Include="Data\DataChucDanh.cs" />
     <Compile Include="Data\DataDocGia.cs" />
     <Compile Include="Data\DataLoaiSach.cs" />
@@ -67,6 +68,7 @@
     <Compile Include="Data\DataNXB.cs" />
     <Compile Include="Data\DataSach.cs" />
     <Compile Include="Data\DataTacGia.cs" />
+    <Compile Include="Data\DataViPham.cs" />
     <Compile Include="Data\DbUtils.cs" />
     <Compile Include="Data\DataDocGia_MuonSach.cs" />
     <Compile Include="GUI\BookManagerForm.cs">
@@ -87,6 +89,12 @@
     <Compile Include="GUI\EditTacGia.Designer.cs">
       <DependentUpon>EditTacGia.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUI\FormGiaHan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\FormGiaHan.Designer.cs">
+      <DependentUpon>FormGiaHan.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI\FormMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -98,6 +106,12 @@
     </Compile>
     <Compile Include="GUI\FormThemSach.Designer.cs">
       <DependentUpon>FormThemSach.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\FormTraSach.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\FormTraSach.Designer.cs">
+      <DependentUpon>FormTraSach.cs</DependentUpon>
     </Compile>
     <Compile Include="GUI\FormXacNhanXoa.cs">
       <SubType>Form</SubType>
@@ -119,6 +133,7 @@
       <DependentUpon>TraSachForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\ChiTietMuon.cs" />
+    <Compile Include="Model\ChiTietTra.cs" />
     <Compile Include="Model\ChucDanh.cs" />
     <Compile Include="Model\DocGia.cs" />
     <Compile Include="Model\DocGia_MuonSach.cs" />
@@ -129,6 +144,7 @@
     <Compile Include="Model\SachResponse.cs" />
     <Compile Include="Model\TacGia.cs" />
     <Compile Include="Model\LoaiSach.cs" />
+    <Compile Include="Model\ViPham.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="GUI\BookManagerForm.resx">
       <DependentUpon>BookManagerForm.cs</DependentUpon>
@@ -139,11 +155,17 @@
     <EmbeddedResource Include="GUI\EditTacGia.resx">
       <DependentUpon>EditTacGia.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="GUI\FormGiaHan.resx">
+      <DependentUpon>FormGiaHan.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GUI\FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\FormThemSach.resx">
       <DependentUpon>FormThemSach.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\FormTraSach.resx">
+      <DependentUpon>FormTraSach.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\FormXacNhanXoa.resx">
       <DependentUpon>FormXacNhanXoa.cs</DependentUpon>
