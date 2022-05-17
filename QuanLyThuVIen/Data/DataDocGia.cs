@@ -17,7 +17,7 @@ namespace QuanLyThuVIen.Data
         public List<DocGia> GetListDocGia()
         {
             using (var cnn = DbUtils.GetConnection())
-            {       
+            {
                 var sql = "select * from DocGia";
                 var lstDocGia = cnn.Query<DocGia>(sql).ToList();
                 return lstDocGia;
@@ -76,14 +76,14 @@ namespace QuanLyThuVIen.Data
                 //            from Sach as s inner join NhaXuatBan as nxb on nxb.MaNhaXuatBan = s.MaNhaXuatBan";
                 try
                 {
-                var sql = "select * from DocGia where MaDocGia = @MaDocGia";
-                var param = new
-                {
-                    MaDocGia = MaDocGia
-                };
+                    var sql = "select * from DocGia where MaDocGia = @MaDocGia";
+                    var param = new
+                    {
+                        MaDocGia = MaDocGia
+                    };
 
-                var lstDocGia = cnn.Query<DocGia>(sql, param).ToList();
-                return lstDocGia[0];
+                    var lstDocGia = cnn.Query<DocGia>(sql, param).ToList();
+                    return lstDocGia[0];
                 }
                 catch (Exception ex)
                 {
@@ -95,7 +95,7 @@ namespace QuanLyThuVIen.Data
         {
             using (var cnn = DbUtils.GetConnection())
             {
-                var sql = @"select Max(MaDocGia) from DocGia";               
+                var sql = @"select Max(MaDocGia) from DocGia";
                 int result = Convert.ToInt32(cnn.ExecuteScalar(sql));
                 return result;
             }
