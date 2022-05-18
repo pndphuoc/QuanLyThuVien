@@ -72,5 +72,128 @@ namespace QuanLyThuVIen.Data
                 return lstSach[0];
             }
         }
+        public List<DocGia> TimkiemDocGia (string searchValue)
+        {
+            if (searchValue != null)
+            {
+                searchValue = "%"+searchValue+"%";
+            }
+            using (var cnn = DbUtils.GetConnection())
+            {
+
+                var sql = "select * from DocGia where TenDocGia like @searchValue";
+                var param = new
+                {
+                    searchValue = searchValue
+                };
+                var lstSach = cnn.Query<DocGia>(sql, param).ToList();
+                return lstSach;
+            }
+        }
+        public bool Insert(DocGia DG)
+        {
+            using (var cnn = DbUtils.GetConnection())
+            {
+                var sql = @"INSERT INTO DocGia (TenDocGia,NgaySinh,MaChucDanh, GioiTinh,Email,DiaChi, SoDienThoai, NgayDangKy,NgayHetHan,Lop,MaKhoa,KhoaHoc,UserName,Password,MaTrangThai)
+                    VALUES (@TenDocGia,@NgaySinh,@MaChucDanh, @GioiTinh,@Email,@DiaChi, @SoDienThoai, @NgayDangKy,@NgayHetHan,@Lop,@MaKhoa,@KhoaHoc,@UserName,@Password,1)";
+
+                var param = new
+                {
+                    TenDocGia = DG.TenDocGia,
+                    NgaySinh = DG.NgaySinh,
+                    MaChucDanh = DG.MaChucDanh,
+                    GioiTinh = DG.GioiTinh,
+                    Email = DG.Email,
+                    DiaChi = DG.DiaChi,
+                    SoDienThoai = DG.SoDienThoai,
+                    NgayDangKy = DG.NgayDangKy,
+                    NgayHetHan = DG.NgayHetHan,
+                    Lop = DG.Lop,
+                    MaKhoa = DG.MaKhoa ,
+                    KhoaHoc = DG.KhoaHoc ,
+                    UserName= DG.Username,
+                    Password = DG.Password
+                };
+
+                int nEffectedRows = cnn.Execute(sql, param);
+
+                //int nEffectedRows = cnn.Execute("sp_Sach_Insert", param, commandType: CommandType.StoredProcedure);
+
+                return nEffectedRows == 1;
+            }
+        }
+        public bool Update(DocGia DG)
+        {
+            using (var cnn = DbUtils.GetConnection())
+            {
+                var sql = @"update DocGia set TenDocGia=@TenDocGia,NgaySinh=@NgaySinh,MaChucDanh=@MaChucDanh,GioiTinh=@GioiTinh,
+                            Email=@Email,DiaChi=@DiaChi,SoDienThoai=@SoDienThoai,NgayDangKy=@NgayDangKy,NgayHetHan=@NgayHetHan,
+                            Lop=@Lop,MaKhoa=@MaKhoa,KhoaHoc=@KhoaHoc,Username=@Username,Password=@Password,MaTrangThai=@MaTrangThai
+                            where MaDocGia=@MaDocGia";
+
+                var param = new
+                {
+                    TenDocGia = DG.TenDocGia,
+                    NgaySinh = DG.NgaySinh,
+                    MaChucDanh = DG.MaChucDanh,
+                    GioiTinh = DG.GioiTinh,
+                    Email = DG.Email,
+                    DiaChi = DG.DiaChi,
+                    SoDienThoai = DG.SoDienThoai,
+                    NgayDangKy = DG.NgayDangKy,
+                    NgayHetHan = DG.NgayHetHan,
+                    Lop = DG.Lop,
+                    MaKhoa = DG.MaKhoa,
+                    KhoaHoc = DG.KhoaHoc,
+                    UserName = DG.Username,
+                    Password = DG.Password,
+                    MaDocGia=DG.MaDocGia,
+                    MaTrangThai=DG.MaTrangThai
+                };
+
+                int nEffectedRows = cnn.Execute(sql, param);
+
+                //int nEffectedRows = cnn.Execute("sp_Sach_Insert", param, commandType: CommandType.StoredProcedure);
+
+                return nEffectedRows == 1;
+            }
+        }
+        public bool DeleteDG(int MaDocGia)
+        {
+            using (var cnn = DbUtils.GetConnection())
+            {
+                var sql = @"Delete from DocGia where MaDocGia=@MaDocGia";
+
+                var param = new
+                {
+                    MaDocGia = MaDocGia
+                };
+
+                int nEffectedRows = cnn.Execute(sql, param);
+
+                //int nEffectedRows = cnn.Execute("sp_Sach_Insert", param, commandType: CommandType.StoredProcedure);
+
+                return nEffectedRows == 1;
+            }
+
+        }
+        public int InUsedDG(int MaDocGia)
+        {
+            using (var cnn = DbUtils.GetConnection())
+            {
+                var sql = @"Select count(*) from ChiTietMuon where TrangThai=1 and MaDocGia=@MaDocGia";
+
+                var param = new
+                {
+                    MaDocGia = MaDocGia
+                };
+
+                int nEffectedRows = Convert.ToInt32(cnn.ExecuteScalar(sql, param));
+
+                //int nEffectedRows = cnn.Execute("sp_Sach_Insert", param, commandType: CommandType.StoredProcedure);
+
+                return nEffectedRows;
+            }
+        }
     }
 }
